@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D046485B18E5F5E300EAEB59 /* WildKingdomCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D046485A18E5F5E300EAEB59 /* WildKingdomCollectionViewCell.m */; };
+		D0982C5418E5CCBA00255FA3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0982C5318E5CCBA00255FA3 /* QuartzCore.framework */; };
 		D09ADBFA18E4AEAF00849D30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D09ADBF918E4AEAF00849D30 /* Foundation.framework */; };
 		D09ADBFC18E4AEAF00849D30 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D09ADBFB18E4AEAF00849D30 /* CoreGraphics.framework */; };
 		D09ADBFE18E4AEAF00849D30 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D09ADBFD18E4AEAF00849D30 /* UIKit.framework */; };
@@ -34,6 +36,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D046485918E5F5E300EAEB59 /* WildKingdomCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WildKingdomCollectionViewCell.h; sourceTree = "<group>"; };
+		D046485A18E5F5E300EAEB59 /* WildKingdomCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WildKingdomCollectionViewCell.m; sourceTree = "<group>"; };
+		D0982C5318E5CCBA00255FA3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D09ADBF618E4AEAF00849D30 /* WildKingdom.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WildKingdom.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D09ADBF918E4AEAF00849D30 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D09ADBFB18E4AEAF00849D30 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -60,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0982C5418E5CCBA00255FA3 /* QuartzCore.framework in Frameworks */,
 				D09ADBFC18E4AEAF00849D30 /* CoreGraphics.framework in Frameworks */,
 				D09ADBFE18E4AEAF00849D30 /* UIKit.framework in Frameworks */,
 				D09ADBFA18E4AEAF00849D30 /* Foundation.framework in Frameworks */,
@@ -101,6 +107,7 @@
 		D09ADBF818E4AEAF00849D30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0982C5318E5CCBA00255FA3 /* QuartzCore.framework */,
 				D09ADBF918E4AEAF00849D30 /* Foundation.framework */,
 				D09ADBFB18E4AEAF00849D30 /* CoreGraphics.framework */,
 				D09ADBFD18E4AEAF00849D30 /* UIKit.framework */,
@@ -117,6 +124,8 @@
 				D09ADC0B18E4AEAF00849D30 /* Main.storyboard */,
 				D09ADC0E18E4AEAF00849D30 /* ViewController.h */,
 				D09ADC0F18E4AEAF00849D30 /* ViewController.m */,
+				D046485918E5F5E300EAEB59 /* WildKingdomCollectionViewCell.h */,
+				D046485A18E5F5E300EAEB59 /* WildKingdomCollectionViewCell.m */,
 				D09ADC1118E4AEAF00849D30 /* Images.xcassets */,
 				D09ADC0018E4AEAF00849D30 /* Supporting Files */,
 			);
@@ -251,6 +260,7 @@
 			files = (
 				D09ADC1018E4AEAF00849D30 /* ViewController.m in Sources */,
 				D09ADC0A18E4AEAF00849D30 /* AppDelegate.m in Sources */,
+				D046485B18E5F5E300EAEB59 /* WildKingdomCollectionViewCell.m in Sources */,
 				D09ADC0618E4AEAF00849D30 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +466,7 @@
 				D09ADC2A18E4AEAF00849D30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D09ADC2B18E4AEAF00849D30 /* Build configuration list for PBXNativeTarget "WildKingdomTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +475,7 @@
 				D09ADC2D18E4AEAF00849D30 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
