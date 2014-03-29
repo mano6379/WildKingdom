@@ -11,7 +11,7 @@
 
 //static NSString * const PhotoCellIdentifier = @"myCollectionViewCellLionsID";
 
-@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITabBarDelegate, UITabBarControllerDelegate>
 
 @property NSDictionary* flickrDictionary;
 @property NSDictionary* flickrPhotoDictionary;
@@ -29,6 +29,7 @@
     
     self.myMutableArray = [NSMutableArray new];
     self.lionCollectionViewCell = [WildKingdomCollectionViewCell new];
+    self.tabBarController.delegate = self;
     
     //why did I need to delete this code?
     //[self.myCollectionViewLions registerClass:[WildKingdomCollectionViewCell class] forCellWithReuseIdentifier:@"myCollectionViewCellLionsID"];
@@ -40,6 +41,9 @@
     NSURLRequest *flickrURLRequest = [NSURLRequest requestWithURL:flickrURL];
     
     //[super viewDidLoad];
+    
+    //this is setting the spinner on in the nav bar
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     [NSURLConnection sendAsynchronousRequest:flickrURLRequest queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
@@ -86,6 +90,7 @@
          NSLog(@"%lu", (unsigned long)self.myMutableArray.count);
          //remember that the view need to reload in the block
          [self.myCollectionViewLions reloadData];
+         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
          
      }];
 
@@ -100,8 +105,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-
+    //if tab bar item is at index 0
     WildKingdomCollectionViewCell *photoCell =
     [self.myCollectionViewLions dequeueReusableCellWithReuseIdentifier:@"myCollectionViewCellLionsID" forIndexPath:indexPath];
      UIImage *flickrImage = [self.myMutableArray objectAtIndex:indexPath.row];
@@ -113,9 +117,11 @@
     
 }
 
+//working on this 3/29, left off here before yoga
+
 //-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
-//    if (self.tabBarController.selectedViewController = [self.tabBarController objectAtIndex:1])
+//    if (self.tabBarController.tabBarItem == 1)
 //    {
 //        UICollectionViewCell *photoCell =
 //        [self.myCollectionViewLions dequeueReusableCellWithReuseIdentifier:@"myCollectionViewCellLionsID" forIndexPath:indexPath];
@@ -126,9 +132,30 @@
 //        NSLog(@"make cell");
 //        return photoCell;
 //    }
+//    else if (self.tabBarController.tabBarItem == 1)
+//    {
+//        UICollectionViewCell *photoCell =
+//        [self.myCollectionViewLions dequeueReusableCellWithReuseIdentifier:@"myCollectionViewCellLionsID" forIndexPath:indexPath];
+//        //UIImage *flickrImage = [self.myMutableArray objectAtIndex:indexPath.row];
+//        photoCell.backgroundColor = [UIColor redColor];
+//        //photoCell.imageView.image = flickrImage;
+//        
+//        NSLog(@"make cell");
+//        return photoCell;
+//    }
+//    //else (self.tabBarController.tabBarItem == 2)
+//    {
+//        UICollectionViewCell *photoCell =
+//        [self.myCollectionViewLions dequeueReusableCellWithReuseIdentifier:@"myCollectionViewCellLionsID" forIndexPath:indexPath];
+//        //UIImage *flickrImage = [self.myMutableArray objectAtIndex:indexPath.row];
+//        photoCell.backgroundColor = [UIColor redColor];
+//        //photoCell.imageView.image = flickrImage;
+//        return photoCell;
+//    }
+//    
 //    return nil;
 //}
-//
-//
+
+
 
 @end

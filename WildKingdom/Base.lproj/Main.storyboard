@@ -81,7 +81,7 @@
         <scene sceneID="mBl-e7-wVf">
             <objects>
                 <navigationController definesPresentationContext="YES" id="p23-8E-zU5" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Bears" id="nvV-6y-ijK"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Bears" id="nvV-6y-ijK"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pgY-CV-ulJ">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
