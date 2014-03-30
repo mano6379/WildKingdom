@@ -36,9 +36,9 @@
     //FlickrAPIKey = @"633598ba88b5bf68d28634f609db6aef";
     
     self.myMutableArray = [NSMutableArray new];
-    tags= @"lion";
+
     [self searchPhotos];
-    self.lionCollectionViewCell = [WildKingdomCollectionViewCell new];
+//    self.lionCollectionViewCell = [WildKingdomCollectionViewCell new];
     //self.tabBar.delegate = self;
     
     //why did I need to delete this code?
@@ -48,11 +48,9 @@
 -(void)searchPhotos
 {
     
-     NSString *getPhotos = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=a2771d1875542f34f36cfa340a824c39&tags=%@&per_page=20&format=json&nojsoncallback=1",tags];
+     NSString *getPhotos = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=a2771d1875542f34f36cfa340a824c39&tags=%@&per_page=10&format=json&nojsoncallback=1",tags];
     
     NSURL *url = [NSURL URLWithString:getPhotos];
-    //this is the JSON url to access the Flickr API
-//    NSURL *flickrURL = [NSURL URLWithString:@"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=633598ba88b5bf68d28634f609db6aef&tags=lions%2C+tigers%2C+bears&text=lions%2C+tigers%2C+bears&safe_search=1&format=json&nojsoncallback=1&api_sig=edf3c69979a834d164c3bba88d128b10", tags];
     
     //An NSURL object represents a URL that can potentially contain the location of a resource on a remote server, the path of a local file on disk, or even an arbitrary piece of encoded data.
     NSURLRequest *flickrURLRequest = [NSURLRequest requestWithURL:url];
@@ -77,6 +75,8 @@
 //         NSLog(@"second dictionary count: %lu", (unsigned long)self.flickrPhotoDictionary.count);
 //         NSLog(@"array count: %lu", (unsigned long)gettingPhotosFromPhotosDictionary.count);
          
+         //need to clear out what was previously in the array before adding new "searched" images by into the mutable array
+         [self.myMutableArray removeAllObjects];
          //for all the NSDictionary items in the gettingPhotosFromPhotosDictionary, please do the following code in {}
          for (NSDictionary *items in  gettingPhotosFromPhotosDictionary)
          {
@@ -136,22 +136,21 @@
     //call "search" method here based on string that's inserted
     //[self search:@""];
     //reference tab bar item pushed gets you the data you want to display
-    if (self.lionTabBarItem.tag == 0)
+    if (item.tag == 0)
     {
         tags = @"lion";
         [self searchPhotos];
     }
     
-    else if (self.tigerTapBarItem.tag == 1)
+    else if (item.tag == 1)
     {
-
-        tags = @"tiger";
+        tags = @"sushi";
         [self searchPhotos];
         //NSLog(@"selected 1 %d",self.tigerTapBarItem);
     }
-    else (self.bearsTabBarItem.tag == 2);
+    else if (item.tag == 2)
     {
-        tags = @"bear";
+        tags = @"sharks";
         [self searchPhotos];
         //NSLog(@"selected  2 %d",self.tabBarController.selectedIndex);
     }
