@@ -9,32 +9,32 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
-                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                        <viewControllerLayoutGuide type="top" id="wLr-AU-76E"/>
+                        <viewControllerLayoutGuide type="bottom" id="MAj-Zr-HwK"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uoy-IW-oR2">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uoy-IW-oR2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1wZ-yY-BhS">
-                                    <size key="itemSize" width="86" height="71"/>
+                                    <size key="itemSize" width="150" height="150"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myCollectionViewCellLionsID" id="zt3-h9-JCs" customClass="WildKingdomCollectionViewCell">
-                                        <rect key="frame" x="0.0" y="64" width="100" height="100"/>
+                                        <rect key="frame" x="0.0" y="64" width="150" height="150"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X8I-bt-VkP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X8I-bt-VkP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
@@ -42,13 +42,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="X8I-bt-VkP" secondAttribute="trailing" id="Ge9-tT-8aK"/>
-                                            <constraint firstItem="X8I-bt-VkP" firstAttribute="leading" secondItem="zt3-h9-JCs" secondAttribute="leading" id="PE8-tE-IwW"/>
-                                            <constraint firstItem="X8I-bt-VkP" firstAttribute="top" secondItem="zt3-h9-JCs" secondAttribute="top" id="Tt5-L6-RAa"/>
-                                            <constraint firstAttribute="bottom" secondItem="X8I-bt-VkP" secondAttribute="bottom" id="zWW-QS-gPc"/>
-                                        </constraints>
-                                        <size key="customSize" width="100" height="100"/>
+                                        <size key="customSize" width="150" height="150"/>
                                         <connections>
                                             <outlet property="imageView" destination="X8I-bt-VkP" id="SRg-cb-0Cj"/>
                                         </connections>
@@ -64,9 +58,9 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <tabBarItem title="Lions" id="YCI-f9-5Bd"/>
-                                    <tabBarItem tag="1" title="Bears" id="L9E-aP-JS9"/>
-                                    <tabBarItem tag="2" title="Tigers" id="b60-dy-Cio"/>
+                                    <tabBarItem title="Sea Turtles" id="YCI-f9-5Bd"/>
+                                    <tabBarItem tag="1" title="Reef Life" id="L9E-aP-JS9"/>
+                                    <tabBarItem tag="2" title="Dolphins" id="b60-dy-Cio"/>
                                 </items>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="vPj-Gv-0os"/>
@@ -74,12 +68,6 @@
                             </tabBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="uoy-IW-oR2" secondAttribute="trailing" id="DaD-gm-cfj"/>
-                            <constraint firstAttribute="bottom" secondItem="uoy-IW-oR2" secondAttribute="bottom" id="H99-5L-8FL"/>
-                            <constraint firstItem="uoy-IW-oR2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="TWS-Rg-Rje"/>
-                            <constraint firstItem="uoy-IW-oR2" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="bvP-dv-yjR"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HSm-t7-Rqj"/>
                     <connections>

@@ -4,7 +4,7 @@
 //
 //  Created by Marion Ano on 3/27/14.
 //  Copyright (c) 2014 Marion Ano. All rights reserved.
-//
+//  FlickrAPIKey = @"633598ba88b5bf68d28634f609db6aef";
 
 #import "ViewController.h"
 #import "WildKingdomCollectionViewCell.h"
@@ -13,8 +13,7 @@
 @interface ViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITabBarDelegate>
 {
     NSString* tags;
-    //NSString *FlickrAPIKey;
-
+    CGRect viewOneFrame;
 }
 
 @property NSDictionary* flickrDictionary;
@@ -33,68 +32,64 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //FlickrAPIKey = @"633598ba88b5bf68d28634f609db6aef";
-    
+    tags = @"sealife";
     self.myMutableArray = [NSMutableArray new];
-
     [self searchPhotos];
-//    self.lionCollectionViewCell = [WildKingdomCollectionViewCell new];
-    //self.tabBar.delegate = self;
+//  self.lionCollectionViewCell = [WildKingdomCollectionViewCell new];
+    
     
     //why did I need to delete this code?
     //[self.myCollectionViewLions registerClass:[WildKingdomCollectionViewCell class] forCellWithReuseIdentifier:@"myCollectionViewCellLionsID"];
 }
-//create helper method here to search for photos using tags:
+
+#pragma mark -- helper method
+//helper method here to search for photos using tags:
 -(void)searchPhotos
 {
-    
-     NSString *getPhotos = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=a2771d1875542f34f36cfa340a824c39&tags=%@&per_page=10&format=json&nojsoncallback=1",tags];
-    
+    //store incoming data into a string
+     NSString *getPhotos = [NSString stringWithFormat:@"http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=a2771d1875542f34f36cfa340a824c39&tags=%@&per_page=18&format=json&nojsoncallback=1",tags];
+    //An NSURL object represents a URL that can potentially contain the location of a resource on a remote server, the path of a local file on disk, or even an arbitrary piece of encoded data.
     NSURL *url = [NSURL URLWithString:getPhotos];
     
-    //An NSURL object represents a URL that can potentially contain the location of a resource on a remote server, the path of a local file on disk, or even an arbitrary piece of encoded data.
+    //NSURLRequest objects represent a URL load request
     NSURLRequest *flickrURLRequest = [NSURLRequest requestWithURL:url];
     
     //this is setting the spinner on in the nav bar
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
+    //An NSURLConnection object lets you load the contents of a URL by providing a URL request object.
     [NSURLConnection sendAsynchronousRequest:flickrURLRequest queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError)
      {
 
-         //this gets us into the JSON NSDictionary
+         //create a dictionary from the JSON String
          self.flickrDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
          
-         //now this gets us into the "photos" NSDictionary
+         //create a second dictionary to get us into the "photos"
          self.flickrPhotoDictionary = self.flickrDictionary[@"photos"];
          
-         //this gets us into the "photo" array
+         //create an array which is filled with dictionary objects
          NSArray *gettingPhotosFromPhotosDictionary = self.flickrPhotoDictionary[@"photo"];
 
 //         NSLog(@"first dictionary count: %lu", (unsigned long)self.flickrDictionary.count);
 //         NSLog(@"second dictionary count: %lu", (unsigned long)self.flickrPhotoDictionary.count);
 //         NSLog(@"array count: %lu", (unsigned long)gettingPhotosFromPhotosDictionary.count);
          
-         //need to clear out what was previously in the array before adding new "searched" images by into the mutable array
+         //need to clear out what was previously in the array before adding new "searched" images back into the mutable array
          [self.myMutableArray removeAllObjects];
-         //for all the NSDictionary items in the gettingPhotosFromPhotosDictionary, please do the following code in {}
+         //loop through each item in the NSDictionary in the array of dictionaries and then please do the following code in the curlies {}
          for (NSDictionary *items in  gettingPhotosFromPhotosDictionary)
          {
-             //this string gets you the address where each photo lives
+             //this string gets you the address where each photo lives. Note: farm, server, id, and secret are all dictionaries in the array
              NSString *photoURL = [NSString stringWithFormat:@"http://farm%@.staticflickr.com/%@/%@_%@.jpg", items[@"farm"], items[@"server"], items[@"id"], items[@"secret"]];
             
              
              //object conversion. Work backwards: What can I create an image from? What do I have? and how do I get to UIImage object? They key is: What do I want and how do I get back to it.
-             
              NSLog(@"%@", photoURL);
              NSURL* url = [NSURL URLWithString:photoURL];
              NSData* data = [NSData dataWithContentsOfURL:url];
              UIImage* image = [UIImage imageWithData:data];
-             
-             //NSData *data = [[NSData dataWithContentsOfURL:[NSURL URLWithString:photoURL]];
-             // NSLog(@"%@", photoURL);
          
-             //adding the URL object into the NSMutable Array which contains URL objects
              //now I have an array with image objects
              [self.myMutableArray addObject:image];
              
@@ -102,7 +97,7 @@
              
          }
          //NSLog(@"%lu", (unsigned long)self.myMutableArray.count);
-         //remember that the view need to reload in the block
+         //remember that the view needs to reload in the block
          [self.myCollectionViewLions reloadData];
          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
          
@@ -110,24 +105,30 @@
 
 }
 
-#pragma mark -- Data Source Methods
+#pragma mark -- delegate Methods
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.myMutableArray.count;
 }
 
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 2;
+}
+
+
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //if tab bar item is at index 0
     WildKingdomCollectionViewCell *photoCell =
     [self.myCollectionViewLions dequeueReusableCellWithReuseIdentifier:@"myCollectionViewCellLionsID" forIndexPath:indexPath];
-     UIImage *flickrImage = [self.myMutableArray objectAtIndex:indexPath.row];
-    //photoCell.backgroundColor = [UIColor redColor];
+    UIImage *flickrImage = [self.myMutableArray objectAtIndex:indexPath.row];
     photoCell.imageView.image = flickrImage;
     
-    NSLog(@"make cell");
-        return photoCell;
+    //NSLog(@"make cell");
+    
+    return photoCell;
 }
 
 //note: outlets above for each tab bar item
@@ -138,66 +139,36 @@
     //reference tab bar item pushed gets you the data you want to display
     if (item.tag == 0)
     {
-        tags = @"lion";
+        tags = @"seaturles";
         [self searchPhotos];
     }
     
     else if (item.tag == 1)
     {
-        tags = @"sushi";
+        tags = @"reeffish";
         [self searchPhotos];
-        //NSLog(@"selected 1 %d",self.tigerTapBarItem);
+    
     }
     else if (item.tag == 2)
     {
-        tags = @"sharks";
+        tags = @"dolphins";
         [self searchPhotos];
-        //NSLog(@"selected  2 %d",self.tabBarController.selectedIndex);
     }
 
-   
 }
 
-
-//working on this 3/29, left off here before yoga
-
-//-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+//-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 //{
-//    if (self.tabBarController.tabBarItem == 0)
+//    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+//    if(fromInterfaceOrientation == UIUserInterfaceLayoutDirectionRightToLeft || fromInterfaceOrientation == UIUserInterfaceLayoutDirectionLeftToRight)
 //    {
-//        UICollectionViewCell *photoCell =
-//        [self.myCollectionViewLions dequeueReusableCellWithReuseIdentifier:@"myCollectionViewCellLionsID" forIndexPath:indexPath];
-//        //UIImage *flickrImage = [self.myMutableArray objectAtIndex:indexPath.row];
-//        photoCell.backgroundColor = [UIColor redColor];
-//        //photoCell.imageView.image = flickrImage;
-//        
-//        NSLog(@"make cell");
-//        return photoCell;
+//        self.lionCollectionViewCell.frame = viewOneFrame;
 //    }
-//    else if (self.tabBarController.tabBarItem == 1)
+//    else
 //    {
-//        UICollectionViewCell *photoCell =
-//        [self.myCollectionViewLions dequeueReusableCellWithReuseIdentifier:@"myCollectionViewCellLionsID" forIndexPath:indexPath];
-//        //UIImage *flickrImage = [self.myMutableArray objectAtIndex:indexPath.row];
-//        photoCell.backgroundColor = [UIColor redColor];
-//        //photoCell.imageView.image = flickrImage;
-//        
-//        NSLog(@"make cell");
-//        return photoCell;
+//        self.lionCollectionViewCell.frame = CGRectMake(self.lionCollectionViewCell.frame.origin.x, self.lionCollectionViewCell.frame.origin.y, 200, 200);
 //    }
-//    //else (self.tabBarController.tabBarItem == 2)
-//    {
-//        UICollectionViewCell *photoCell =
-//        [self.myCollectionViewLions dequeueReusableCellWithReuseIdentifier:@"myCollectionViewCellLionsID" forIndexPath:indexPath];
-//        //UIImage *flickrImage = [self.myMutableArray objectAtIndex:indexPath.row];
-//        photoCell.backgroundColor = [UIColor redColor];
-//        //photoCell.imageView.image = flickrImage;
-//        return photoCell;
-//    }
-//    
-//    return nil;
 //}
-
 
 
 @end
